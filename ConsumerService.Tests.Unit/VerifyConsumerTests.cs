@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
 using FluentAssertions;
 using Orchestration.Commands;
 using Orchestration.ConsumerService.Domain.Events;
+using SharedKernel;
 using Xunit;
 
-namespace Tests.Consumer.Unit.ConsumerService;
+namespace ConsumerService.Tests.Unit;
 
 public class VerifyConsumerTests
 {

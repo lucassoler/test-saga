@@ -1,4 +1,4 @@
-namespace Contracts;
+namespace SharedKernel;
 
 public class DomainEventPublisherInMemory: IDomainEventPublisher
 {

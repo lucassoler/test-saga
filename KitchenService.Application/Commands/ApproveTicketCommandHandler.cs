@@ -1,6 +1,6 @@
-using Contracts;
 using KitchenService.Domain.Events;
 using KitchenService.Domain.Repositories;
+using SharedKernel;
 
 namespace KitchenService.Application.Commands;
 

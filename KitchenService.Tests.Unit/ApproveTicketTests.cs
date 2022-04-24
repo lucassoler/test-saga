@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
 using FluentAssertions;
 using KitchenService.Application.Commands;
 using KitchenService.Domain.Aggregates;
 using KitchenService.Domain.Events;
 using KitchenService.Domain.Exceptions;
 using KitchenService.Infrastructure.Repositories;
+using SharedKernel;
 using Xunit;
 
-namespace Tests.Consumer.Unit.KitchenService;
+namespace KitchenService.Tests.Unit;
 
 public class ApproveTicketTests
 {

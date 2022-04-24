@@ -1,4 +1,4 @@
-namespace Contracts;
+namespace SharedKernel;
 
 public interface ICommandHandler<in T> where T : ICommand
 {

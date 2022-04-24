@@ -1,4 +1,4 @@
-using Contracts;
+using SharedKernel;
 
 namespace KitchenService.Domain.Events;
 

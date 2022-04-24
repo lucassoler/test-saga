@@ -13,7 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ConsumerService.Domain\ConsumerService.Domain.csproj" />
-      <ProjectReference Include="..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
     </ItemGroup>
 
 </Project>

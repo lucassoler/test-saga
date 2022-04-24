@@ -1,4 +1,4 @@
-using Contracts;
+using SharedKernel;
 
 namespace Orchestration.ConsumerService.Domain.Events;
 

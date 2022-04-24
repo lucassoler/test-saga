@@ -1,5 +1,5 @@
-using Contracts;
 using Orchestration.ConsumerService.Domain.Events;
+using SharedKernel;
 
 namespace Orchestration.Commands;
 

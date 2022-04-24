@@ -1,7 +1,7 @@
-﻿using Contracts;
-using KitchenService.Domain.Aggregates;
+﻿using KitchenService.Domain.Aggregates;
 using KitchenService.Domain.Events;
 using KitchenService.Domain.Repositories;
+using SharedKernel;
 
 namespace KitchenService.Application.Commands;
 

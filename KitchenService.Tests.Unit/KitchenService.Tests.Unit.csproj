@@ -5,12 +5,9 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
-
-        <RootNamespace>Tests.Consumer.Unit</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.6.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -24,11 +21,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ConsumerService.Application\ConsumerService.Application.csproj" />
-      <ProjectReference Include="..\ConsumerService.Domain\ConsumerService.Domain.csproj" />
       <ProjectReference Include="..\KitchenService.Application\KitchenService.Application.csproj" />
-      <ProjectReference Include="..\KitchenService.Domain\KitchenService.Domain.csproj" />
       <ProjectReference Include="..\KitchenService.Infrastructure\KitchenService.Infrastructure.csproj" />
+      <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="FluentAssertions">
+        <HintPath>..\..\..\..\.nuget\packages\fluentassertions\6.6.0\lib\net6.0\FluentAssertions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
