@@ -10,5 +10,6 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::BDD02335-6A46-47C1-84CE-169E2EA8D6AA::net6.0::Accounting.Tests.Unit.AuthorizeCardTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::C053CDB8-7FD2-4792-A1B3-977CE9502EC6::net6.0::KitchenService.Tests.Unit.RejectTicketTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::5D42AE40-44A3-4215-AA61-D260AA5E70A3::net6.0::OrderService.Tests.Unit.CreateOrderTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
