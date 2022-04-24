@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
 using FluentAssertions;
 using KitchenService.Application.Commands;
 using KitchenService.Domain.Aggregates;
+using KitchenService.Domain.Events;
+using KitchenService.Domain.Exceptions;
 using KitchenService.Infrastructure.Repositories;
 using Xunit;
 
@@ -22,7 +25,7 @@ public class ApproveTicketTests
     {
         _eventPublisher = new DomainEventPublisherInMemory();
         _repository = new TicketRepositoryInMemory(new List<Ticket> { new(OrderId)});
-        _handler = new ApproveTicketCommandHandler(_repository);
+        _handler = new ApproveTicketCommandHandler(_repository, _eventPublisher);
         _command = CreateCommand(OrderId);
     }
 
@@ -31,6 +34,27 @@ public class ApproveTicketTests
     {
         await _handler.HandleAsync(_command);
         await VerifyTicketPersisted(OrderId);
+    }
+
+    [Fact]
+    public async Task ApproveATicketShouldPublishedATicketApprovedEvent()
+    {
+        await _handler.HandleAsync(_command);
+        VerifyPublishedEvent();
+    }
+
+    [Fact]
+    public async Task ApproveATicketWithANonExistingOrderShouldThrowAnError() 
+        => await AssertException(() => _handler.HandleAsync(CreateCommand(Guid.NewGuid())));
+
+    private static async Task AssertException(Func<Task> act) 
+        => await act.Should().ThrowAsync<TicketNotFoundException>();
+
+    private void VerifyPublishedEvent()
+    {
+        var publishedEvents = _eventPublisher.OfType<TicketApproved>().ToList();
+        publishedEvents.Count.Should().Be(1);
+        publishedEvents.First().OrderId.Should().Be(OrderId);
     }
 
     private async Task VerifyTicketPersisted(Guid orderId)

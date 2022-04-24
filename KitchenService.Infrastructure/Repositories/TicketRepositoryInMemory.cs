@@ -1,4 +1,5 @@
 using KitchenService.Domain.Aggregates;
+using KitchenService.Domain.Exceptions;
 using KitchenService.Domain.Repositories;
 
 namespace KitchenService.Infrastructure.Repositories;
@@ -25,7 +26,15 @@ public class TicketRepositoryInMemory : ITicketRepository
     }
 
     public Task<Ticket> Get(Guid orderId)
+    
     {
-        return Task.FromResult(_ticketPersisted.First(x => x.OrderId == orderId));
+        var result = _ticketPersisted.FirstOrDefault(x => x.OrderId == orderId);
+
+        if (result is null)
+        {
+            throw new TicketNotFoundException();
+        }
+        
+        return Task.FromResult(result);
     }
 }
