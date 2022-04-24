@@ -26,6 +26,9 @@
     <ItemGroup>
       <ProjectReference Include="..\ConsumerService.Application\ConsumerService.Application.csproj" />
       <ProjectReference Include="..\ConsumerService.Domain\ConsumerService.Domain.csproj" />
+      <ProjectReference Include="..\KitchenService.Application\KitchenService.Application.csproj" />
+      <ProjectReference Include="..\KitchenService.Domain\KitchenService.Domain.csproj" />
+      <ProjectReference Include="..\KitchenService.Infrastructure\KitchenService.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

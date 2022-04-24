@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8d58423d_002Dbcd0_002D4e75_002Dbfe5_002D9bafd23d4e2b/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="2" IsActive="True" Name="VerifyConsumerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::E84A1CF7-2472-4CD4-A989-3D0AD12DFC11::net6.0::Tests.Consumer.Unit.KitchenService.CreateTicketTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E84A1CF7-2472-4CD4-A989-3D0AD12DFC11::net6.0::Tests.Consumer.Unit.KitchenService.ApproveTicketTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

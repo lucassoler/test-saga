@@ -1,11 +1,23 @@
-namespace KitchenService.Application.Commands;
+namespace KitchenService.Domain.Aggregates;
 
 public class Ticket
 {
-    private readonly Guid _orderId;
+    public readonly Guid OrderId;
+    public TicketStatuses Status = TicketStatuses.WaitingApproval;
 
     public Ticket(Guid orderId)
     {
-        _orderId = orderId;
+        OrderId = orderId;
     }
+
+    public void Approve()
+    {
+        Status = TicketStatuses.Approved;
+    }
+}
+
+public enum TicketStatuses
+{
+    WaitingApproval,
+    Approved
 }

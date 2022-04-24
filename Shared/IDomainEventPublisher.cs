@@ -1,6 +1,6 @@
 namespace Contracts;
 
-public class IDomainEventPublisher
+public interface IDomainEventPublisher
 {
-    
+    Task Publish<T>(T domainEvent) where T : IDomainEvent;
 }
