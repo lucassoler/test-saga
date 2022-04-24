@@ -14,10 +14,16 @@ public class Ticket
     {
         Status = TicketStatuses.Approved;
     }
+
+    public void Reject()
+    {
+        Status = TicketStatuses.Rejected;
+    }
 }
 
 public enum TicketStatuses
 {
     WaitingApproval,
-    Approved
+    Approved,
+    Rejected
 }

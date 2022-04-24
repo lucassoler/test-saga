@@ -9,5 +9,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c252936c_002Ddb04_002D4d27_002D8477_002Dfe5f1600f803/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthorizeCardTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::BDD02335-6A46-47C1-84CE-169E2EA8D6AA::net6.0::Accounting.Tests.Unit.AuthorizeCardTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C053CDB8-7FD2-4792-A1B3-977CE9502EC6::net6.0::KitchenService.Tests.Unit.RejectTicketTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
