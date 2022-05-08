@@ -1,12 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8d58423d_002Dbcd0_002D4e75_002Dbfe5_002D9bafd23d4e2b/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="2" Name="VerifyConsumerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::E84A1CF7-2472-4CD4-A989-3D0AD12DFC11::net6.0::Tests.Consumer.Unit.KitchenService.CreateTicketTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E84A1CF7-2472-4CD4-A989-3D0AD12DFC11::net6.0::Tests.Consumer.Unit.KitchenService.ApproveTicketTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c252936c_002Ddb04_002D4d27_002D8477_002Dfe5f1600f803/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthorizeCardTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c252936c_002Ddb04_002D4d27_002D8477_002Dfe5f1600f803/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="AuthorizeCardTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::BDD02335-6A46-47C1-84CE-169E2EA8D6AA::net6.0::Accounting.Tests.Unit.AuthorizeCardTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::C053CDB8-7FD2-4792-A1B3-977CE9502EC6::net6.0::KitchenService.Tests.Unit.RejectTicketTests&lt;/TestId&gt;

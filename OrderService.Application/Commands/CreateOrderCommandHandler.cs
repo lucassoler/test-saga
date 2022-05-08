@@ -1,7 +1,7 @@
 ﻿using OrderService.Domain;
 using OrderService.Domain.Events;
 using OrderService.Domain.Repositories;
-using OrderService.Domain.Services;
+using OrderService.Domain.Sagas;
 using SharedKernel;
 
 namespace OrderService.Application.Commands;
@@ -9,11 +9,11 @@ namespace OrderService.Application.Commands;
 public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand>
 {
     private readonly IOrderRepository _repository;
-    private readonly ICreateOrderSaga _createOrderSaga;
+    private readonly CreateOrderSaga _createOrderSaga;
     private readonly IDomainEventPublisher _eventPublisher;
 
     public CreateOrderCommandHandler(IOrderRepository repository,
-        ICreateOrderSaga createOrderSaga,
+        CreateOrderSaga createOrderSaga,
         IDomainEventPublisher eventPublisher)
     {
         _repository = repository;
