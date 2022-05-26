@@ -23,21 +23,25 @@ public class CreateOrderSaga : SimpleSaga<CreateOrderSagaState>
         _orderService = orderService;
     }
 
-    public async Task<SagaResult> Start(Guid orderId)
+    public async Task Start(Guid orderId)
     {
         SagaDefinition = 
             WithState(new CreateOrderSagaState(orderId))
-                .Step(_consumerService.ValidateOrderByConsumer)
-                .Step(_kitchenService.CreateTicket)
-                .Step(_accountingService.Authorize)
-                .Step(_kitchenService.ConfirmTicket)
-                .Step(_orderService.Approve)
+                .Step()
+                    .WithCompensation(_orderService.Reject)
+                .Step()
+                    .InvokeParticipant(_consumerService.ValidateOrderByConsumer)
+                .Step()
+                    .InvokeParticipant(_kitchenService.CreateTicket)
+                    .WithCompensation(_kitchenService.CancelTicket)
+                .Step()
+                    .InvokeParticipant(_accountingService.Authorize)
+                .Step()
+                    .InvokeParticipant(_kitchenService.ConfirmTicket)
+                .Step()
+                    .InvokeParticipant(_orderService.Approve)
             .Build();
 
         await Execute();
-        
-        return new SagaResult(true);
     }
 }
-
-public record SagaResult(bool Succeed);

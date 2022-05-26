@@ -5,12 +5,17 @@ namespace OrderService.Infrastructure.Proxies;
 
 public class KitchenServiceProxy : IKitchenServiceProxy
 {
-    public Task CreateTicket(CreateOrderSagaState createOrderSagaState)
+    public Task CreateTicket(CreateOrderSagaState state)
     {
         throw new NotImplementedException();
     }
 
-    public Task ConfirmTicket(CreateOrderSagaState createOrderSagaState)
+    public Task ConfirmTicket(CreateOrderSagaState state)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task CancelTicket(CreateOrderSagaState state)
     {
         throw new NotImplementedException();
     }

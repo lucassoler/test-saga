@@ -4,6 +4,7 @@ namespace OrderService.Domain.Services;
 
 public interface IKitchenServiceProxy
 {
-    Task CreateTicket(CreateOrderSagaState createOrderSagaState);
-    Task ConfirmTicket(CreateOrderSagaState createOrderSagaState);
+    Task CreateTicket(CreateOrderSagaState state);
+    Task ConfirmTicket(CreateOrderSagaState state);
+    Task CancelTicket(CreateOrderSagaState state);
 }

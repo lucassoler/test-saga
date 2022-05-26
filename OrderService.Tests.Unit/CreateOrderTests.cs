@@ -3,6 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
+using NSubstitute.ReceivedExtensions;
 using OrderService.Application.Commands;
 using OrderService.Domain.Events;
 using OrderService.Domain.Sagas;
@@ -20,24 +23,20 @@ public class CreateOrderTests
     private readonly OrderRepositoryInMemory _repository;
     private readonly CreateOrderCommandHandler _handler;
     private readonly DomainEventPublisherInMemory _eventPublisher;
-    private readonly Mock<IConsumerServiceProxy> _consumerProxy;
-    private readonly Mock<IKitchenServiceProxy> _kitchenProxy;
-    private readonly Mock<IAccountingServiceProxy> _accountingProxy;
-    private readonly Mock<IOrderServiceProxy> _orderProxy;
+    private readonly IConsumerServiceProxy _consumerProxy = Substitute.For<IConsumerServiceProxy>();
+    private readonly IKitchenServiceProxy _kitchenProxy = Substitute.For<IKitchenServiceProxy>();
+    private readonly IAccountingServiceProxy _accountingProxy = Substitute.For<IAccountingServiceProxy>();
+    private readonly IOrderServiceProxy _orderProxy = Substitute.For<IOrderServiceProxy>();
 
     public CreateOrderTests()
     {
         _repository = new OrderRepositoryInMemory();
         _eventPublisher = new DomainEventPublisherInMemory();
-        _consumerProxy = new Mock<IConsumerServiceProxy>();
-        _kitchenProxy = new Mock<IKitchenServiceProxy>();
-        _accountingProxy = new Mock<IAccountingServiceProxy>();
-        _orderProxy = new Mock<IOrderServiceProxy>();
         var createOrderSaga = new CreateOrderSaga(
-            _kitchenProxy.Object,
-            _consumerProxy.Object,
-            _accountingProxy.Object,
-            _orderProxy.Object
+            _kitchenProxy,
+            _consumerProxy,
+            _accountingProxy,
+            _orderProxy
         );
         _handler = new CreateOrderCommandHandler(_repository, createOrderSaga, _eventPublisher);
     }
@@ -60,44 +59,61 @@ public class CreateOrderTests
     public async Task CreateAnOrderShouldVerifyConsumer()
     {
         await _handler.HandleAsync(CreateCommand());
-        _consumerProxy.Verify(x => x.ValidateOrderByConsumer(new CreateOrderSagaState(OrderId)), Times.Once);
+        await _consumerProxy.Received().ValidateOrderByConsumer(new CreateOrderSagaState(OrderId));
     }
 
     [Fact]
     public async Task CreateAnOrderShouldCreateTicketInKitchen()
     {
         await _handler.HandleAsync(CreateCommand());
-        _kitchenProxy.Verify(x => x.CreateTicket(new CreateOrderSagaState(OrderId)), Times.Once);
+        await _kitchenProxy.Received().CreateTicket(new CreateOrderSagaState(OrderId));
     }
 
     [Fact]
     public async Task CreateAnOrderShouldAuthorizePaymentInAccounting()
     {
         await _handler.HandleAsync(CreateCommand());
-        _accountingProxy.Verify(x => x.Authorize(new CreateOrderSagaState(OrderId)), Times.Once);
+        await _accountingProxy.Received().Authorize(new CreateOrderSagaState(OrderId));
     }
 
     [Fact]
     public async Task AuthorizationFromAccountingShouldConfirmTicketInKitchen()
     {
         await _handler.HandleAsync(CreateCommand());
-        _kitchenProxy.Verify(x => x.ConfirmTicket(new CreateOrderSagaState(OrderId)), Times.Once);
+        await _kitchenProxy.Received().ConfirmTicket(new CreateOrderSagaState(OrderId));
     }
 
     [Fact]
     public async Task OrderShouldBeApprovedAfterTheTicketHasBeenConfirmedInKitchen()
     {
         await _handler.HandleAsync(CreateCommand());
-        _orderProxy.Verify(x => x.Approve(new CreateOrderSagaState(OrderId)), Times.Once);
+        await _orderProxy.Received().Approve(new CreateOrderSagaState(OrderId));
     }
 
-    /*[Fact]
-    public async Task CreateAnOrderShouldNotPublishOrderCreatedIfSagaFailed()
+    [Fact]
+    public async Task CreateOrderShouldRevokeOrderCreationIfValidatingConsumerFailed()
     {
-        SetupSagaResult(new SagaResult(false));
+        _consumerProxy.ValidateOrderByConsumer(Arg.Any<CreateOrderSagaState>()).ThrowsForAnyArgs(new Exception());
         await _handler.HandleAsync(CreateCommand());
-        VerifyEventNotPublished();
-    }*/
+        await _orderProxy.Received().Reject(new CreateOrderSagaState(OrderId));
+    }
+
+    [Fact]
+    public async Task CreateOrderShouldNotCancelTicketIfValidatingConsumerFailed()
+    {
+        _consumerProxy.ValidateOrderByConsumer(Arg.Any<CreateOrderSagaState>()).ThrowsForAnyArgs(new Exception());
+        await _handler.HandleAsync(CreateCommand());
+        await _kitchenProxy.DidNotReceiveWithAnyArgs().CancelTicket(Arg.Any<CreateOrderSagaState>());
+    }
+
+
+    [Fact]
+    public async Task CreateOrderShouldCancelTicketIfAuthorizingConsumerFailed()
+    {
+        _accountingProxy.Authorize(Arg.Any<CreateOrderSagaState>()).ThrowsForAnyArgs(new Exception());
+        await _handler.HandleAsync(CreateCommand());
+        await _kitchenProxy.Received().CancelTicket(Arg.Any<CreateOrderSagaState>());
+    }
 
     private void VerifyPublishedEvent()
     {

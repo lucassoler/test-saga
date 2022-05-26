@@ -9,4 +9,9 @@ public class OrderServiceProxy : IOrderServiceProxy
     {
         throw new NotImplementedException();
     }
+
+    public Task Reject(CreateOrderSagaState createOrderSagaState)
+    {
+        throw new NotImplementedException();
+    }
 }
