@@ -1,4 +1,4 @@
-namespace SharedKernel;
+namespace SharedKernel.Saga;
 
 public class SagaDefinition<T>
 {

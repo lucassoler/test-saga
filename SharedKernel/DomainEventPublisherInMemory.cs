@@ -7,7 +7,7 @@ public class DomainEventPublisherInMemory: IDomainEventPublisher
     public Task Publish<T>(T domainEvent) where T : IDomainEvent
     {
         _publishedEvents.Add(domainEvent);
-        return Task.Delay(0);
+        return Task.CompletedTask;
     }
 
     public bool ShouldHavePublished<T>(IDomainEvent domainEvent) where T : IDomainEvent

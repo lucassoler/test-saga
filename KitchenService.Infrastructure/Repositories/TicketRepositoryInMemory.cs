@@ -22,7 +22,7 @@ public class TicketRepositoryInMemory : ITicketRepository
         }
         
         _ticketPersisted.Add(ticket);
-        return Task.Delay(0);
+        return Task.CompletedTask;
     }
 
     public Task<Ticket> Get(Guid orderId)

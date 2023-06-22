@@ -22,7 +22,7 @@ public class OrderRepositoryInMemory : IOrderRepository
         }
         
         _ordersPersisted.Add(order);
-        return Task.Delay(0);
+        return Task.CompletedTask;
     }
 
     public Task<Order> Get(Guid orderId)
